@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32126.315
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeleniumTest", "SeleniumTest\SeleniumTest.csproj", "{0FCAE96B-9AFF-44C9-9250-05A2D4F03040}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0FCAE96B-9AFF-44C9-9250-05A2D4F03040}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0FCAE96B-9AFF-44C9-9250-05A2D4F03040}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0FCAE96B-9AFF-44C9-9250-05A2D4F03040}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0FCAE96B-9AFF-44C9-9250-05A2D4F03040}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E9C9A27E-0C1F-4CDF-BD7E-EA06093C07A8}
+	EndGlobalSection
+EndGlobal
