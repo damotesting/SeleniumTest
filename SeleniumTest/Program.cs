@@ -35,7 +35,7 @@ namespace SeleniumTest
 
             //Find the Search Box element & enter search term
             IWebElement element = driver.FindElement(By.Name("q"));
-            element.SendKeys("Rocktime");
+            element.SendKeys("Yunex Traffic");
 
             //Find the I'm Feeling Lucky Button & click
             IWebElement button = driver.FindElement(By.Id("gbqfbb"));
