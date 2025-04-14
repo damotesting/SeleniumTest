@@ -1,58 +1,65 @@
 ﻿using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Support.UI;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using SeleniumExtras.WaitHelpers;
+using System.Threading;
 
 namespace SeleniumTest
 {
-    class Program
+    [TestFixture]
+    public class DuckDuckGoSearchTest
     {
-        //Create reference for the browser
-        IWebDriver driver = new ChromeDriver();
-
-        static void Main(string[] args)
-        {
-        }
+        private IWebDriver driver;
+        private WebDriverWait wait;
 
         [SetUp]
         public void Initialize()
         {
-            //Navigate to Google home page
-            driver.Navigate().GoToUrl("https://www.google.co.uk");
-            Console.WriteLine("Opened URL");
+            var options = new ChromeOptions();
+            options.AddArgument("--start-maximized");
+            // options.AddArgument("--headless"); // Optional
+
+            driver = new ChromeDriver(options);
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
+            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+
+            driver.Navigate().GoToUrl("https://duckduckgo.com");
+            TestContext.WriteLine("Opened DuckDuckGo homepage");
         }
 
         [Test]
-        public void ExecuteTest()
+        public void ExecuteSearchTest()
         {
-            //Find the Cookie Agree & click
-            IWebElement cookie = driver.FindElement(By.Id("L2AGLb"));
-            cookie.Click();
+            try
+            {
+                // Locate the search box
+                var searchBox = wait.Until(ExpectedConditions.ElementIsVisible(By.Id("searchbox_input")));
+                searchBox.Clear();
+                searchBox.Click();
 
-            //Find the Search Box element & enter search term
-            IWebElement element = driver.FindElement(By.Name("q"));
-            element.SendKeys("Selenium");
+                // Send full query at once
+                searchBox.SendKeys("Selenium" + Keys.Enter);
 
-            //Find the I'm Feeling Lucky Button & click
-            IWebElement button = driver.FindElement(By.Id("gbqfbb"));
-            button.Click();
+                // Wait for title update or results to appear
+                wait.Until(d => d.Title.ToLower().Contains("selenium"));
 
-            Console.WriteLine("Executed Test");
+                TestContext.WriteLine("Page title after search: " + driver.Title);
+                Assert.IsTrue(driver.Title.ToLower().Contains("selenium"), "Search result page title does not contain expected text.");
+            }
+            catch (Exception ex)
+            {
+                TestContext.WriteLine("Error during test: " + ex.Message);
+                throw;
+            }
         }
-
 
         [TearDown]
         public void CleanUp()
         {
-            driver.Close();
-            Console.WriteLine("Closed the Browser");
+            driver.Quit();
+            TestContext.WriteLine("Closed the browser.");
         }
-
-
-        }
-
     }
+}
