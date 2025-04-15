@@ -47,6 +47,12 @@ namespace SeleniumTest
 
                 TestContext.WriteLine("Page title after search: " + driver.Title);
                 Assert.IsTrue(driver.Title.ToLower().Contains("selenium"), "Search result page title does not contain expected text.");
+                
+                // Take screenshot of the results page
+                Screenshot screenshot = ((ITakesScreenshot)driver).GetScreenshot();
+                string screenshotPath = $"screenshot_{DateTime.Now:yyyyMMdd_HHmmss}.png";
+                screenshot.SaveAsFile(screenshotPath);
+                TestContext.WriteLine($"Screenshot saved: {screenshotPath}");
             }
             catch (Exception ex)
             {
