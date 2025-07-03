@@ -19,7 +19,7 @@ namespace SeleniumTest
         {
             var options = new ChromeOptions();
             options.AddArgument("--start-maximized");
-            // options.AddArgument("--headless"); // Optional
+            // options.AddArgument("--headless"); // Optional to run headless
 
             driver = new ChromeDriver(options);
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
